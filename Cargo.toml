@@ -4,6 +4,8 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
+axum = { version = "0.7.7", features = ["macros"] }
+chrono = "0.4.38"
 color-eyre = "0.6.3"
 eos = { git = "https://github.com/Rapptz/eos.git", version = "0.1.0" }
 figment = { version = "0.10.19", features = ["env", "json", "toml", "yaml"] }

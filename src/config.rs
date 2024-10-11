@@ -4,28 +4,32 @@ use figment::Figment;
 use serde::Deserialize;
 use url::Url;
 
-#[derive(Debug, Clone, Deserialize)]
+#[derive(Debug, Default, Clone, Deserialize)]
 pub enum WhichTerms {
+    #[default]
     All,
     MostRecentOnly,
     #[serde(untagged)]
     These(Vec<String>),
 }
 
-impl Default for WhichTerms {
-    fn default() -> Self {
-        Self::All
-    }
+#[derive(Debug, Default, Clone, Deserialize)]
+pub enum CreateEventsFor {
+    #[default]
+    DueDateOnly,
+    ReleaseAndDueDates,
+    DurationAssignmentIsActive,
 }
 
 #[derive(Debug, Clone, Deserialize)]
 pub struct Config {
+    pub gradescope_cookie: String,
     #[serde(default = "default_gradescope_base_url")]
     pub gradescope_base_url: Url,
-    pub gradescope_cookie: String,
-
     #[serde(default)]
     pub which_terms: WhichTerms,
+    #[serde(default)]
+    pub create_events_for: CreateEventsFor,
 }
 
 fn default_gradescope_base_url() -> Url {

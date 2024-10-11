@@ -7,6 +7,7 @@ use crate::config::{Config, WhichTerms};
 
 #[derive(Debug, Clone)]
 pub struct Course {
+    pub id: u32,
     pub name: String,
     pub shortname: String,
     pub url: Url,
@@ -35,7 +36,15 @@ impl Config {
             .parse(course.attr("href").ok_or_eyre("Failed to find course URL")?)
             .wrap_err("Failed to parse course URL")?;
 
-        Ok(Course { name, shortname, url })
+        let id = url
+            .path()
+            .rsplit_once("/")
+            .ok_or_eyre("Failed to find course ID in URL")?
+            .1
+            .parse()
+            .wrap_err("Failed to parse course ID from URL")?;
+
+        Ok(Course { id, name, shortname, url })
     }
 
     fn parse_courses_for_term(&self, courses_for_term: ElementRef<'_>) -> Result<Vec<Course>> {
