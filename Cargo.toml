@@ -1,0 +1,15 @@
+[package]
+name = "gradescope-ics"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+color-eyre = "0.6.3"
+eos = { git = "https://github.com/Rapptz/eos.git", version = "0.1.0" }
+figment = { version = "0.10.19", features = ["env", "json", "toml", "yaml"] }
+icalendar = "0.16.8"
+reqwest = "0.12.8"
+scraper = "0.20.0"
+serde = { version = "1.0.210", features = ["derive"] }
+tokio = { version = "1.40.0", features = ["macros", "rt-multi-thread"] }
+url = { version = "2.5.2", features = ["serde"] }
