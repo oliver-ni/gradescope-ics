@@ -4,7 +4,7 @@ use icalendar::{Calendar, CalendarDateTime, Component, Event, EventLike};
 
 use crate::config::{Config, CreateEventsFor};
 use crate::gradescope::course::Assignment;
-use crate::gradescope::home::Course;
+use crate::gradescope::home::CourseInfo;
 
 fn eos_datetime_to_ical(dt: eos::DateTime<UtcOffset>) -> Result<CalendarDateTime> {
     Ok(chrono::DateTime::from_timestamp(dt.timestamp().as_seconds(), dt.nanosecond())
@@ -41,7 +41,7 @@ impl Config {
 
     pub fn course_to_ical_calendar(
         &self,
-        course: &Course,
+        course: &CourseInfo,
         assignments: &[Assignment],
     ) -> Result<Calendar> {
         let mut cal = Calendar::new();
